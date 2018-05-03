@@ -55,3 +55,64 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 apt-get update
 apt-get install spotify-client
 
+# Atom Editor
+wget -q -O - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
+sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
+apt-get update
+apt-get install atom
+
+# Sublime Text
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add 
+apt-get install apt-transport-https
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+apt-get update
+apt-get install sublime-text
+
+# Mega Client
+wget https://mega.nz/linux/MEGAsync/Debian_9.0/amd64/megasync-Debian_9.0_amd64.deb
+dpkg -i megasync-Debian_9.0_amd64.deb
+apt -f install
+
+# Libre Office Style Breeze
+apt install libreoffice-style-breeze
+
+# Dia
+apt install dia
+
+# MySQL - Not working on debian testing
+echo -e "deb http://repo.mysql.com/apt/debian/ stretch mysql-5.7\ndeb-src http://repo.mysql.com/apt/debian/ stretch mysql-5.7" > /etc/apt/sources.list.d/mysql.list
+wget -O /tmp/RPM-GPG-KEY-mysql https://repo.mysql.com/RPM-GPG-KEY-mysql --no-check-certificate
+apt-key add /tmp/RPM-GPG-KEY-mysql
+apt update
+apt install mysql-server
+
+# MariaDB
+apt install mariadb-server
+
+# Disable MySQL to start on boot
+systemctl disable mysql
+
+# Slack
+wget -q https://downloads.slack-edge.com/linux_releases/slack-desktop-3.1.1-amd64.deb
+dpkg -i slack-desktop-3.1.1-amd64.deb
+apt -f install
+rm slack-desktop-3.1.1-amd64.deb
+
+# RAR
+apt install rar unrar
+
+# Eclipse IDE
+apt install default-jdk default-jre wget -y
+wget http://mirror.nbtelecom.com.br/eclipse/oomph/epp/oxygen/R2/eclipse-inst-linux64.tar.gz
+tar -xzf eclipse-inst-linux64.tar.gz
+cd eclipse-installer
+mkdir /opt/eclipse/
+mkdir /opt/eclipse/java-oxygen
+chmod 777 -R /opt/eclipse/java-oxygen
+./eclipse-inst
+
+# VLC
+apt install vlc -y
+
+# Torrent Client
+apt install deluge
